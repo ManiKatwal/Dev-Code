@@ -6,11 +6,13 @@ import java.util.concurrent.Executors;
 
 class Processor1 implements Runnable {
 	private CountDownLatch latch;
+
 	public Processor1(CountDownLatch latch) {
 		this.latch = latch;
 	}
+
 	public void run() {
-		System.out.println("Started.......");
+		System.out.println("Started !!!");
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -20,13 +22,14 @@ class Processor1 implements Runnable {
 		latch.countDown();
 	}
 }
+
 public class CountDL {
 	public static void main(String[] args) {
 		CountDownLatch latch = new CountDownLatch(3);
 		ExecutorService executor = Executors.newFixedThreadPool(3);
-		for(int i=0; i<3; i++) {
+		for (int i = 0; i < 3; i++) {
 			executor.submit(new Processor(latch));
-			
+
 		}
 		try {
 			latch.await();
@@ -34,7 +37,7 @@ public class CountDL {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Completed.......");
+		System.out.println("Completed !!!");
 	}
 
 }
